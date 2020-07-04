@@ -1,7 +1,7 @@
 # pgplot
  A simple library adding graph drawing functionality to Pygame
 
-## Don't use negative numbers, they will be drawn off of the graph. Or do, I can't stop you
+### Don't use negative numbers, they will be drawn off of the graph. Or do, I can't stop you
 
 # Usage
 Need Pygame
