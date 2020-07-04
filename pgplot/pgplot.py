@@ -7,10 +7,10 @@ class Pgp(object):
                  bottomleft=None, bottomright=None, centre=None,
                  labelColour=None):
         self.__screen = surface
-        if width > 400:
+        if width > 300:
             self.__width = width
         else:
-            self.__width = 400
+            self.__width = 300
 
         if height > 300:
             self.__height = height
@@ -56,6 +56,14 @@ class Pgp(object):
         pg.draw.rect(self.__screen, (222, 222, 222), self.__rect)
 
         startPos = self.__rect.bottomleft
+
+        text = self.__font.render("0", True, self.__textColour)
+        textRect = text.get_rect(center=(startPos[0], int(startPos[1] + 30)))
+        self.__screen.blit(text, textRect)
+
+        text = self.__font.render("0", True, self.__textColour)
+        textRect = text.get_rect(center=(startPos[0] - 30, int(startPos[1])))
+        self.__screen.blit(text, textRect)
 
         try:
             distance = self.__width / (len(self.__xLabels) - 1)
@@ -230,7 +238,7 @@ if __name__ == "__main__":
     pg.init()
     pg.font.init()
     screen = pg.display.set_mode((1920, 1080))
-    pgp = Pgp(screen, 900, 900, centre=(960, 500))
+    pgp = Pgp(screen, 0,0, centre=(960, 500))
 
     print(pgp.getPlots())
     print(pgp.getLabels())
@@ -244,12 +252,12 @@ if __name__ == "__main__":
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        pgp.addPlot((x, abs(math.sin(math.radians(x)))))
-        pgp.addPlot((x, abs(math.cos(math.radians(x)))), line=2)
+        pgp.addPlot((x, (math.sin(math.radians(x)) + 1)))
+        pgp.addPlot((x, (math.cos(math.radians(x)) + 1)), line=2)
         x += 1
         pgp.draw()
         pg.display.update()
         fps = str(int(clock.get_fps()))
         pg.display.set_caption('GRAPH | FPS: ' + fps)
-        clock.tick(60)
+        clock.tick(5)
 
