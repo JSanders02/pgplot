@@ -57,20 +57,12 @@ class Pgp(object):
 
         startPos = self.__rect.bottomleft
 
-        text = self.__font.render("0", True, self.__textColour)
-        textRect = text.get_rect(center=(startPos[0], int(startPos[1] + 30)))
-        self.__screen.blit(text, textRect)
-
-        text = self.__font.render("0", True, self.__textColour)
-        textRect = text.get_rect(center=(startPos[0] - 30, int(startPos[1])))
-        self.__screen.blit(text, textRect)
-
         try:
             distance = self.__width / (len(self.__xLabels) - 1)
         except ZeroDivisionError:
             distance = 0
 
-        for i in range(1, len(self.__xLabels)):
+        for i in range(0, len(self.__xLabels)):
             xPos = int(startPos[0] + distance * i)
             pg.draw.line(self.__screen, (170, 170, 170),
                          (xPos, int(startPos[1])),
@@ -85,7 +77,7 @@ class Pgp(object):
         except ZeroDivisionError:
             distance = 0
 
-        for i in range(1, len(self.__yLabels)):
+        for i in range(0, len(self.__yLabels)):
             yPos = int(startPos[1] - distance * i)
             pg.draw.line(self.__screen, (170, 170, 170),
                          (int(startPos[0]), yPos),
@@ -226,24 +218,17 @@ class Pgp(object):
         self.__ySpacing = self.__height // len(self.__yLabels)
         self.__xSpacing = self.__width // len(self.__xLabels)
 
-    def setStartPoint(self, startPoint):
-        if not type(startPoint) is tuple:
-            raise ValueError("Plot must be type: tuple (x, y)")
-
-        self.__xLabels[0] = startPoint[0]
-        self.__yLabels[0] = startPoint[1]
-
 
 if __name__ == "__main__":
     pg.init()
     pg.font.init()
     screen = pg.display.set_mode((1920, 1080))
-    pgp = Pgp(screen, 0,0, centre=(960, 500))
+    pgp = Pgp(screen, 0, 0, centre=(960, 500))
 
     print(pgp.getPlots())
     print(pgp.getLabels())
 
-    x = 0
+    x = 360
     clock = pg.time.Clock()
 
     while True:
@@ -252,7 +237,7 @@ if __name__ == "__main__":
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        if x <= 360:
+        if x <= 720:
             pgp.addPlot((x, (math.sin(math.radians(x))) + 1))
             pgp.addPlot((x, (math.cos(math.radians(x))) + 1), line=2)
             x += 1
