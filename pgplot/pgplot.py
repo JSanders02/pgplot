@@ -200,18 +200,25 @@ class Pgp(object):
         return [self.__xLabels, self.__yLabels]
 
     def generateLabels(self):
+        xLine = 1
+        yLine = 1
+        if self.highest(0, 1) < self.highest(0, 2):
+            xLine = 2
+        if self.highest(1, 1) < self.highest(1, 2):
+            yLine = 2
+
         self.__xLabels = [self.__xLabels[0]]
         self.__yLabels = [self.__yLabels[0]]
-        self.__xInterval = self.findInterval(0, 1)
-        self.__yInterval = self.findInterval(1, 1)
+        self.__xInterval = self.findInterval(0, xLine)
+        self.__yInterval = self.findInterval(1, yLine)
 
         currentNum = self.__xLabels[0]
-        while currentNum < self.highest(0, 1):
+        while currentNum < self.highest(0, xLine):
             currentNum += self.__xInterval
             self.__xLabels.append(round(currentNum, 2))
 
         currentNum = self.__yLabels[0]
-        while currentNum < self.highest(1, 1):
+        while currentNum < self.highest(1, yLine):
             currentNum += self.__yInterval
             self.__yLabels.append(round(currentNum, 2))
 
@@ -238,10 +245,9 @@ if __name__ == "__main__":
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        if x <= 10:
-            pgp.addPlot((x, 4**x))
-            pgp.addPlot((x, 3**x), line=2)
-            x += 1
+        pgp.addPlot((x, abs(math.sin(math.radians(x)))))
+        pgp.addPlot((x, abs(math.cos(math.radians(x)))), line=2)
+        x += 1
         pgp.draw()
         pg.display.update()
         fps = str(int(clock.get_fps()))
