@@ -119,6 +119,27 @@ def ln():
         pg.display.set_caption('Circle Example | FPS: ' + fps)
         clock.tick()
 
+def sinxx():
+    screen = pg.display.set_mode((1920, 1080))
+    pgp = pgplot.Pgp(screen, 500, 500, centre=(960, 500))
+    x = 0
+    clock = pg.time.Clock()
+
+    while True:
+        for event in pg.event.get():
+            if event == pg.QUIT:
+                pg.quit()
+                quit()
+        screen.fill((255, 255, 255))
+        if x <= 10:
+            pgp.addPlot((x, abs(math.sin(math.radians(x**x)))))
+        x += 0.0025
+        pgp.draw()
+        pg.display.update()
+        fps = str(int(clock.get_fps()))
+        pg.display.set_caption('Circle Example | FPS: ' + fps)
+        clock.tick()
+
 
 if __name__ == "__main__":
     pg.init()
@@ -138,18 +159,19 @@ if __name__ == "__main__":
     @@                    @@
     @@      4) Ln x       @@
     @@                    @@
-    @@    5) ¯\_(ツ)_/¯    @@
+    @@    5) Sin(x^x)     @@  
     @@                    @@
+    @@    6) ¯\_(ツ)_/¯    @@
     @@                    @@
     @@@@@@@@@@@@@@@@@@@@@@@@
 
     ''')
 
     choice = 'None'
-    choiceList = ['1', '2', '3', '4', '5']
+    choiceList = ['1', '2', '3', '4', '5', '6']
 
     while choice not in choiceList:
-        choice = input('Enter choice [1/2/3/4/5]: ')
+        choice = input('Enter choice [1/2/3/4/5/6]: ')
     if choice == "1":
         time.sleep(0.5)
         circle()
@@ -163,5 +185,8 @@ if __name__ == "__main__":
         time.sleep(0.5)
         ln()
     if choice == "5":
+        time.sleep(0.5)
+        sinxx()
+    if choice == "6":
         time.sleep(0.5)
         idk()
