@@ -123,6 +123,8 @@ class Pgp(object):
                 self.__plots1.append(plot)
             else:
                 self.__plots1.insert(position, plot)
+            if len(self.__plots1) > 1:
+                self.generateLabels()
             self.convertPlots(1)
 
         elif line == 2:
@@ -130,10 +132,9 @@ class Pgp(object):
                 self.__plots2.append(plot)
             else:
                 self.__plots2.insert(position, plot)
+            if len(self.__plots1) > 1:
+                self.generateLabels()
             self.convertPlots(2)
-
-        if len(self.__plots1) > 1:
-            self.generateLabels()
 
     def convertPlots(self, line):
         if line == 1:
@@ -228,7 +229,7 @@ if __name__ == "__main__":
     print(pgp.getPlots())
     print(pgp.getLabels())
 
-    x = 360
+    x = 0
     clock = pg.time.Clock()
 
     while True:
@@ -237,9 +238,9 @@ if __name__ == "__main__":
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        if x <= 720:
-            pgp.addPlot((x, (math.sin(math.radians(x))) + 1))
-            pgp.addPlot((x, (math.cos(math.radians(x))) + 1), line=2)
+        if x <= 10:
+            pgp.addPlot((x, 4**x))
+            pgp.addPlot((x, 3**x), line=2)
             x += 1
         pgp.draw()
         pg.display.update()
