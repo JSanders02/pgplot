@@ -181,6 +181,8 @@ class Pgp(object):
         mostticks = [self.__width, self.__height][axis] / 50
 
         minimum = self.highest(axis, line) / mostticks
+        if minimum == 0:
+            minimum = 1
         magnitude = 10 ** math.floor(math.log(minimum, 10))
         residual = minimum / magnitude
         if residual > 5:
@@ -202,10 +204,18 @@ class Pgp(object):
     def generateLabels(self):
         xLine = 1
         yLine = 1
-        if self.highest(0, 1) < self.highest(0, 2):
-            xLine = 2
-        if self.highest(1, 1) < self.highest(1, 2):
-            yLine = 2
+        try:
+            if self.highest(0, 1) < self.highest(0, 2):
+                xLine = 2
+            if self.highest(1, 1) < self.highest(1, 2):
+                yLine = 2
+        except IndexError:
+            if len(self.__plots1) == 0:
+                xLine = 2
+                yLine = 2
+            elif len(self.__plots2) == 0:
+                xLine = 1
+                yLine = 1
 
         self.__xLabels = [self.__xLabels[0]]
         self.__yLabels = [self.__yLabels[0]]
@@ -231,7 +241,7 @@ if __name__ == "__main__":
     pg.init()
     pg.font.init()
     screen = pg.display.set_mode((1920, 1080))
-    pgp = Pgp(screen, 0, 0, centre=(960, 500))
+    pgp = Pgp(screen, 500, 500, centre=(960, 500))
 
     print(pgp.getPlots())
     print(pgp.getLabels())
@@ -245,12 +255,15 @@ if __name__ == "__main__":
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        pgp.addPlot((x, abs(math.sin(math.radians(x)))))
-        pgp.addPlot((x, abs(math.cos(math.radians(x)))), line=2)
-        x += 1
+        try:
+            pgp.addPlot((x, math.sqrt(25-(x-5)**2)+5))
+            pgp.addPlot((x, -math.sqrt(25 - (x - 5) ** 2) + 5))
+        except ValueError:
+            pass
+        x += 0.01
         pgp.draw()
         pg.display.update()
         fps = str(int(clock.get_fps()))
         pg.display.set_caption('GRAPH | FPS: ' + fps)
-        clock.tick(60)
+        clock.tick()
 
