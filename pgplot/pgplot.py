@@ -252,12 +252,13 @@ if __name__ == "__main__":
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        pgp.addPlot((x, (math.sin(math.radians(x)) + 1)))
-        pgp.addPlot((x, (math.cos(math.radians(x)) + 1)), line=2)
-        x += 1
+        if x <= 360:
+            pgp.addPlot((x, (math.sin(math.radians(x))) + 1))
+            pgp.addPlot((x, (math.cos(math.radians(x))) + 1), line=2)
+            x += 1
         pgp.draw()
         pg.display.update()
         fps = str(int(clock.get_fps()))
         pg.display.set_caption('GRAPH | FPS: ' + fps)
-        clock.tick(5)
+        clock.tick(60)
 
