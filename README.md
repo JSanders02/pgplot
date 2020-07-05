@@ -4,8 +4,8 @@
 ### Don't use negative numbers, they will be drawn off of the graph. Or do, I can't stop you
 
 # Usage
-Need Pygame \n
-Put pygame.init() and pygame.font.init at the start of your program
+Need Pygame. Put pygame.init() and pygame.font.init at the start of your program
+Place pgplot.py in your working directory and call import pgplot at the start of your program
 
 ## Graphing object: Pgp(surface, width, height, topleft=None, topright=None, bottomleft=None, bottomright=None, centre=None, labelColour=None)
 surface is a Pygame surface object (for example, pg.display.set_mode((width, height)))
