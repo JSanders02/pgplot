@@ -243,9 +243,6 @@ if __name__ == "__main__":
     screen = pg.display.set_mode((1920, 1080))
     pgp = Pgp(screen, 500, 500, centre=(960, 500))
 
-    print(pgp.getPlots())
-    print(pgp.getLabels())
-
     x = 0
     clock = pg.time.Clock()
 

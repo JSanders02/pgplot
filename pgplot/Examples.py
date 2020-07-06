@@ -100,7 +100,7 @@ def root():
 
 def ln():
     screen = pg.display.set_mode((1920, 1080))
-    pgp = pgplot.Pgp(screen, 500, 500, centre=(960, 500))
+    pgp = pgplot.Pgp(screen, 500, 300, centre=(960, 500))
     x = 1
     clock = pg.time.Clock()
 
@@ -110,14 +110,15 @@ def ln():
                 pg.quit()
                 quit()
         screen.fill((255, 255, 255))
-        if x <= 10:
+        if x <= 100:
             pgp.addPlot((x, math.log(x, math.e)))
-        x += 0.01
+        x += 0.1
         pgp.draw()
         pg.display.update()
         fps = str(int(clock.get_fps()))
         pg.display.set_caption('Circle Example | FPS: ' + fps)
         clock.tick()
+
 
 def sinxx():
     screen = pg.display.set_mode((1920, 1080))
@@ -132,8 +133,32 @@ def sinxx():
                 quit()
         screen.fill((255, 255, 255))
         if x <= 10:
-            pgp.addPlot((x, abs(math.sin(math.radians(x**x)))))
+            pgp.addPlot((x, abs(math.sin(math.radians(x ** x)))))
         x += 0.0025
+        pgp.draw()
+        pg.display.update()
+        fps = str(int(clock.get_fps()))
+        pg.display.set_caption('Circle Example | FPS: ' + fps)
+        clock.tick()
+
+
+def idk2():
+    screen = pg.display.set_mode((1920, 1080))
+    pgp = pgplot.Pgp(screen, 500, 500, centre=(960, 500))
+    x = 0
+    clock = pg.time.Clock()
+
+    while True:
+        for event in pg.event.get():
+            if event == pg.QUIT:
+                pg.quit()
+                quit()
+        screen.fill((255, 255, 255))
+        if x <= 1:
+            print(x)
+            pgp.addPlot((x, abs(math.sin(x ** x) / (
+                    2 ** (((x ** x) - math.pi / 2) / math.pi)))))
+            x += 0.005
         pgp.draw()
         pg.display.update()
         fps = str(int(clock.get_fps()))
