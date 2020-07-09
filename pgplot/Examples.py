@@ -122,7 +122,7 @@ def ln():
 
 def sinxx():
     screen = pg.display.set_mode((1920, 1080))
-    pgp = pgplot.Pgp(screen, 500, 500, centre=(960, 500))
+    pgp = pgplot.Pgp(screen, 500, 500, centre=(960, 500), drawLine=True)
     x = 0
     clock = pg.time.Clock()
 

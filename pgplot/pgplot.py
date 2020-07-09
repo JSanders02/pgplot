@@ -5,7 +5,7 @@ import math
 class Pgp(object):
     def __init__(self, surface, width, height, topleft=None, topright=None,
                  bottomleft=None, bottomright=None, centre=None,
-                 labelColour=None):
+                 labelColour=None, drawLine=None):
         self.__screen = surface
         if width > 300:
             self.__width = width
@@ -38,6 +38,11 @@ class Pgp(object):
             self.__textColour = (33, 33, 33)
         else:
             self.__textColour = labelColour
+
+        if drawLine is None:
+            self.__drawLine = True
+        else:
+            self.__drawLine = drawLine
 
         self.__plots1 = []
         self.__plotCoords1 = []
@@ -87,19 +92,20 @@ class Pgp(object):
             textRect = text.get_rect(center=(int(startPos[0] - 30), yPos))
             self.__screen.blit(text, textRect)
 
-        plots = self.__plotCoords1
-        for i in range(0, len(self.__plotCoords1) - 1):
-            pg.draw.line(self.__screen, (20, 20, 195),
-                         (startPos[0] + plots[i][0], startPos[1] - plots[i][1]),
-                         (startPos[0] + plots[i + 1][0],
-                          startPos[1] - plots[i + 1][1]))
+        if self.__drawLine:
+            plots = self.__plotCoords1
+            for i in range(0, len(self.__plotCoords1) - 1):
+                pg.draw.line(self.__screen, (20, 20, 195),
+                             (startPos[0] + plots[i][0], startPos[1] - plots[i][1]),
+                             (startPos[0] + plots[i + 1][0],
+                              startPos[1] - plots[i + 1][1]))
 
-        plots = self.__plotCoords2
-        for i in range(0, len(self.__plotCoords2) - 1):
-            pg.draw.line(self.__screen, (195, 20, 20),
-                         (startPos[0] + plots[i][0], startPos[1] - plots[i][1]),
-                         (startPos[0] + plots[i + 1][0],
-                          startPos[1] - plots[i + 1][1]))
+            plots = self.__plotCoords2
+            for i in range(0, len(self.__plotCoords2) - 1):
+                pg.draw.line(self.__screen, (195, 20, 20),
+                             (startPos[0] + plots[i][0], startPos[1] - plots[i][1]),
+                             (startPos[0] + plots[i + 1][0],
+                              startPos[1] - plots[i + 1][1]))
 
         for plot in self.__plotCoords1:
             plotRect = pg.Rect(0, 0, 3, 3)
