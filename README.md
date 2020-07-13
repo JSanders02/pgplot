@@ -1,6 +1,8 @@
 # pgplot
  A simple library adding graph drawing functionality to Pygame</br>
- Just download pgplot file - that contains everything needed for full functionality
+ Just download pgplot file - that contains everything needed for full functionality. Then drag the pgplot.py file into the same folder as any program you need it for</br>
+ Alternatively, run the command 'pip install pgplot' on command prompt/powershell</br>
+ Then, to use it in your program, add 'import pgplot' at the start.
 
 ### Don't use negative numbers, they will be drawn off of the graph. Or do, I can't stop you
 
