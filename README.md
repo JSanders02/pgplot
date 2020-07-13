@@ -8,11 +8,12 @@
 Need Pygame. Put pygame.init() and pygame.font.init at the start of your program<br/>
 Place pgplot.py in your working directory and call import pgplot at the start of your program
 
-## Graphing object: Pgp(surface, width, height, topleft=None, topright=None, bottomleft=None, bottomright=None, centre=None, labelColour=None)
+## Graphing object: graphObj = Pgp(surface, width, height, topleft=None, topright=None, bottomleft=None, bottomright=None, centre=None, drawLine=None)
 surface is a Pygame surface object (for example, pg.display.set_mode((width, height)))<br/>
 MUST specify coordinates for one of: topleft, topright, bottomleft, bottomright, centre. These are used for placing your graph on the screen.<br/>
-labelColour is optional, but will need to be a tuple containing an rgb code - for the axis labels.<br/>
-Minimum size for graph: 300x300
+drawLine determines whether the line connecting points will be drawn - can have scatter graphs or line graphs.</br>
+Minimum size for graph: 300x300 (anything smaller will be set to this)</br>
+Usage example: pgp = Pgp(screen, 450, 450, centre=(500, 500), drawLine=True) - will create a line graph of size 450x450 with centre 500, 500
 
 ### Usage - after creation
 To add a plot: graphObj.addPlot(plotCoords, position=None, line=None)<br/>
